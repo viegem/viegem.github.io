@@ -1,0 +1,715 @@
+/* ==========================================================================
+   VIEGEM SERVER — STYLESHEET CHÍNH
+   Dùng chung cho tất cả các trang (/, /rules/, /staffs/, /wiki/, /magirpg/)
+   Cấu trúc file:
+     1. Biến CSS (màu, font, khoảng cách) — chỉnh nhanh theme ở đây
+     2. Reset & base
+     3. Header / Navigation
+     4. Hero section
+     5. Cụm server (cards)
+     6. Media buttons
+     7. Footer
+     8. Trang Rules
+     9. Trang Staffs
+    10. Trang Wiki
+    11. Trang MagiRPG
+    12. Utilities & animation (fade-in on scroll)
+    13. Responsive (mobile)
+   ========================================================================== */
+
+/* ---------- 1. BIẾN CSS — TÙY CHỈNH MÀU SẮC / FONT Ở ĐÂY ---------- */
+:root {
+  --c-bg: #0a0a0d;           /* nền chính - đen */
+  --c-bg-alt: #131316;       /* nền phụ (card, section xen kẽ) */
+  --c-bg-elevated: #1b1b1f;  /* nền nổi hơn (header khi scroll, card hover) */
+  --c-red: #e0263f;          /* đỏ - điểm nhấn chính, nút, viền */
+  --c-red-dim: #7a1522;      /* đỏ tối - viền tĩnh, đường kẻ */
+  --c-yellow: #f4c430;       /* vàng - highlight, chữ quan trọng */
+  --c-text: #ece9e4;         /* chữ chính */
+  --c-text-dim: #9c9a9c;     /* chữ phụ, mô tả */
+  --c-online: #3ecf6e;
+  --c-offline: #e0263f;
+
+  --font-display: 'Orbitron', sans-serif; /* tiêu đề */
+  --font-body: 'Rajdhani', sans-serif;    /* nội dung */
+
+  --header-h: 72px;
+  --radius: 10px;
+  --transition: 220ms cubic-bezier(.3,.7,.4,1);
+  --max-w: 1180px;
+}
+
+/* ---------- 2. RESET & BASE ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  text-align: center; /* Căn giữa toàn bộ văn bản trên site — kế thừa xuống mọi phần tử con */
+}
+
+/* Danh sách (ol/ul) căn giữa: marker vẫn nằm cạnh chữ nhờ list-style-position: inside */
+ul, ol { list-style-position: inside; }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Chỉ báo focus bàn phím — accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--c-yellow);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ---------- 2b. KEYFRAMES DÙNG CHUNG ---------- */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 6px currentColor; }
+  50%      { box-shadow: 0 0 16px currentColor; }
+}
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(14px, -18px) scale(1.06); }
+}
+
+/* ---------- 3. HEADER / NAVIGATION ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.site-header.scrolled {
+  background: rgba(10, 10, 13, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--c-red-dim);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+}
+
+.brand img {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+}
+
+.brand .brand-red { color: var(--c-red); }
+.brand .brand-yellow { color: var(--c-yellow); }
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.main-nav a {
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  transition: color var(--transition), background var(--transition);
+  position: relative;
+}
+
+/* Gạch chân mọc dần khi hover/active — hiệu ứng transform, không lag */
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 3px;
+  height: 2px;
+  background: var(--c-yellow);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition);
+}
+.main-nav a:hover::after,
+.main-nav a.active::after { transform: scaleX(1); }
+
+.main-nav a:hover { color: var(--c-yellow); background: rgba(244,196,48,0.08); }
+
+.main-nav a.active { color: var(--c-yellow); }
+
+/* Nút hamburger — chỉ hiện trên mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--c-text);
+  transition: transform var(--transition), opacity var(--transition);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- 4. HERO SECTION ---------- */
+.hero {
+  position: relative;
+  padding: 96px 0 72px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(224,38,63,0.16), transparent 70%),
+    var(--c-bg);
+  border-bottom: 1px solid var(--c-red-dim);
+  overflow: hidden;
+}
+
+/* Quầng sáng trôi nổi nhẹ phía sau hero — chỉ dùng transform, không lag */
+.hero::before, .hero::after {
+  content: "";
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero::before {
+  top: -120px; left: 8%;
+  background: rgba(224,38,63,0.22);
+  animation: float-orb 9s ease-in-out infinite;
+}
+.hero::after {
+  top: -60px; right: 10%;
+  background: rgba(244,196,48,0.14);
+  animation: float-orb 11s ease-in-out infinite reverse;
+}
+.hero .container { position: relative; z-index: 1; }
+
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  color: var(--c-text);
+  opacity: 0;
+  animation: reveal-up 700ms ease forwards;
+}
+
+.hero h1 .accent { color: var(--c-red); }
+
+.hero p.tagline {
+  margin: 20px auto 0;
+  max-width: 620px;
+  color: var(--c-text-dim);
+  font-size: 1.15rem;
+  opacity: 0;
+  animation: reveal-up 700ms ease forwards;
+  animation-delay: 120ms;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 36px;
+  opacity: 0;
+  animation: reveal-up 700ms ease forwards;
+  animation-delay: 240ms;
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 14px 30px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  will-change: transform;
+}
+.btn:hover { transform: scale(1.045); }
+.btn:active { transform: scale(0.98); }
+
+.btn-primary {
+  background: var(--c-red);
+  color: #fff;
+  box-shadow: 0 0 0 rgba(224,38,63,0.5);
+}
+.btn-primary:hover { box-shadow: 0 0 22px rgba(224,38,63,0.55); }
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--c-yellow);
+  color: var(--c-yellow);
+}
+.btn-secondary:hover { box-shadow: 0 0 18px rgba(244,196,48,0.4); background: rgba(244,196,48,0.08); }
+
+.copy-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--c-bg-elevated);
+  border: 1px solid var(--c-yellow);
+  color: var(--c-yellow);
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 999;
+}
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Trạng thái server */
+.server-status {
+  margin: 44px auto 0;
+  max-width: 640px;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  opacity: 0;
+  animation: reveal-up 700ms ease forwards;
+  animation-delay: 360ms;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c-text-dim);
+  flex-shrink: 0;
+}
+.status-dot.online { background: var(--c-online); color: var(--c-online); animation: pulse-glow 2s ease-in-out infinite; }
+.status-dot.offline { background: var(--c-offline); color: var(--c-offline); animation: pulse-glow 2s ease-in-out infinite; }
+
+.status-label { font-family: var(--font-display); font-size: 1.1rem; }
+
+.status-meta {
+  margin-top: 10px;
+  color: var(--c-text-dim);
+  font-size: 0.98rem;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.status-players {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.status-players span {
+  background: var(--c-bg-elevated);
+  border: 1px solid var(--c-red-dim);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* ---------- 5. CỤM SERVER (CARDS) ---------- */
+.section {
+  padding: 72px 0;
+}
+.section h2 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section h2 .accent { color: var(--c-yellow); }
+
+.cluster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.cluster-card {
+  display: block;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  will-change: transform;
+}
+.cluster-card:hover {
+  transform: scale(1.03);
+  border-color: var(--c-yellow);
+  box-shadow: 0 0 26px rgba(224,38,63,0.28);
+}
+.cluster-card img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  transition: transform 500ms ease;
+  will-change: transform;
+}
+.cluster-card:hover img { transform: scale(1.08); }
+.cluster-card .cluster-body { padding: 20px; }
+.cluster-card h3 { color: var(--c-yellow); font-size: 1.3rem; margin-bottom: 8px; }
+.cluster-card p { color: var(--c-text-dim); font-size: 0.98rem; }
+
+/* ---------- 6. MEDIA BUTTONS ---------- */
+.media-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.media-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px;
+  border-radius: var(--radius);
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  font-weight: 700;
+  transition: transform var(--transition), border-color var(--transition), color var(--transition);
+  will-change: transform;
+}
+.media-btn svg { width: 22px; height: 22px; fill: currentColor; }
+.media-btn:hover { transform: scale(1.05); border-color: var(--c-yellow); color: var(--c-yellow); }
+
+/* ---------- 7. FOOTER ---------- */
+.site-footer {
+  background: var(--c-bg-alt);
+  border-top: 1px solid var(--c-red-dim);
+  padding: 56px 0 24px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 32px;
+}
+.footer-col h4 {
+  font-size: 1rem;
+  color: var(--c-yellow);
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+.footer-col p { color: var(--c-text-dim); font-size: 0.95rem; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a { color: var(--c-text-dim); font-size: 0.95rem; transition: color var(--transition); }
+.footer-col ul a:hover { color: var(--c-yellow); }
+.footer-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-family: var(--font-display); }
+.footer-brand img { width: 30px; height: 30px; border-radius: 6px; }
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--c-red-dim);
+  text-align: center;
+  color: var(--c-text-dim);
+  font-size: 0.88rem;
+}
+
+/* ---------- 8. TRANG RULES ---------- */
+.rules-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.rules-tab-btn {
+  padding: 12px 26px;
+  border-radius: var(--radius);
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  color: var(--c-text-dim);
+  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.rules-tab-btn.active {
+  color: var(--c-yellow);
+  border-color: var(--c-yellow);
+  background: rgba(244,196,48,0.08);
+}
+.rules-panel { display: none; }
+.rules-panel.active { display: block; }
+
+.rules-box {
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  border-left: 4px solid var(--c-red);
+  border-radius: var(--radius);
+  padding: 28px 30px;
+  margin-bottom: 24px;
+}
+.rules-box h3 { color: var(--c-yellow); margin-bottom: 16px; font-size: 1.2rem; }
+.rules-box ol { display: flex; flex-direction: column; gap: 10px; }
+.rules-box ol li::marker { color: var(--c-red); font-weight: 700; }
+
+/* ---------- 9. TRANG STAFFS ---------- */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+.staff-card {
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  text-align: center;
+  transition: transform var(--transition), border-color var(--transition);
+  will-change: transform;
+}
+.staff-card:hover { transform: scale(1.03); border-color: var(--c-yellow); }
+.staff-avatars {
+  display: flex;
+  justify-content: center;
+  gap: -8px;
+  position: relative;
+  height: 76px;
+  margin-bottom: 14px;
+}
+.staff-skin {
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
+  border: 2px solid var(--c-red-dim);
+  background: var(--c-bg-elevated);
+  object-fit: cover;
+}
+.staff-discord-badge {
+  position: absolute;
+  bottom: -4px;
+  right: calc(50% - 46px);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--c-bg-alt);
+  background: var(--c-bg-elevated);
+  object-fit: cover;
+}
+.staff-role {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--c-bg);
+  background: var(--c-yellow);
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.staff-name { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 4px; }
+.staff-discord {
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.staff-discord-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-text-dim); }
+.staff-discord-dot.online { background: var(--c-online); }
+.staff-discord-dot.idle { background: var(--c-yellow); }
+.staff-discord-dot.dnd { background: var(--c-red); }
+
+/* ---------- 10. TRANG WIKI ---------- */
+.wiki-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.wiki-toc {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.wiki-toc h4 { color: var(--c-yellow); font-size: 0.95rem; margin-bottom: 12px; font-family: var(--font-body); }
+.wiki-toc ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.wiki-toc a { color: var(--c-text-dim); font-size: 0.95rem; transition: color var(--transition); }
+.wiki-toc a:hover, .wiki-toc a.active { color: var(--c-yellow); }
+
+.wiki-content { display: flex; flex-direction: column; gap: 24px; }
+.wiki-card {
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  border-radius: var(--radius);
+  padding: 28px 30px;
+  scroll-margin-top: calc(var(--header-h) + 20px);
+}
+.wiki-card h2 { color: var(--c-yellow); font-size: 1.4rem; margin-bottom: 14px; }
+.wiki-card .wiki-body { color: var(--c-text); line-height: 1.7; }
+.wiki-card .wiki-body p { margin-bottom: 12px; }
+.wiki-card .wiki-body ul { display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- 11. TRANG MAGIRPG ---------- */
+.cluster-hero {
+  padding: 80px 0 56px;
+  text-align: center;
+  border-bottom: 1px solid var(--c-red-dim);
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(244,196,48,0.10), transparent 70%);
+}
+.cluster-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  opacity: 0;
+  animation: reveal-up 700ms ease forwards;
+}
+.cluster-hero .tagline { opacity: 0; animation: reveal-up 700ms ease forwards; animation-delay: 120ms; }
+.cluster-hero .hero-actions { animation-delay: 240ms; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+.feature-card {
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-red-dim);
+  border-radius: var(--radius);
+  padding: 26px;
+  transition: border-color var(--transition), transform var(--transition);
+  will-change: transform;
+}
+.feature-card:hover { border-color: var(--c-yellow); transform: scale(1.02); }
+.feature-card h3 { color: var(--c-yellow); font-size: 1.15rem; margin-bottom: 10px; }
+.feature-card p { color: var(--c-text-dim); font-size: 0.95rem; }
+
+/* ---------- 12. UTILITIES / ANIMATION ---------- */
+.fade-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 600ms ease, transform 600ms ease;
+  will-change: transform, opacity;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* Hiệu ứng xuất hiện so le (staggered) cho các thẻ trong lưới —
+   mỗi thẻ trễ hơn thẻ trước một chút, tạo cảm giác "đổ vào" tự nhiên. */
+.cluster-grid > .fade-up:nth-child(1),
+.feature-grid > .fade-up:nth-child(1),
+.staff-grid > .fade-up:nth-child(1),
+.media-grid > .fade-up:nth-child(1) { transition-delay: 0ms; }
+.cluster-grid > .fade-up:nth-child(2),
+.feature-grid > .fade-up:nth-child(2),
+.staff-grid > .fade-up:nth-child(2),
+.media-grid > .fade-up:nth-child(2) { transition-delay: 80ms; }
+.cluster-grid > .fade-up:nth-child(3),
+.feature-grid > .fade-up:nth-child(3),
+.staff-grid > .fade-up:nth-child(3),
+.media-grid > .fade-up:nth-child(3) { transition-delay: 160ms; }
+.feature-grid > .fade-up:nth-child(4),
+.staff-grid > .fade-up:nth-child(4) { transition-delay: 240ms; }
+.feature-grid > .fade-up:nth-child(5),
+.staff-grid > .fade-up:nth-child(5) { transition-delay: 320ms; }
+.feature-grid > .fade-up:nth-child(6),
+.staff-grid > .fade-up:nth-child(6) { transition-delay: 400ms; }
+
+.breadcrumb {
+  color: var(--c-text-dim);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+}
+.breadcrumb a { color: var(--c-text-dim); }
+.breadcrumb a:hover { color: var(--c-yellow); }
+.breadcrumb .sep { margin: 0 8px; }
+.breadcrumb .current { color: var(--c-yellow); }
+
+/* ---------- 13. RESPONSIVE (MOBILE) ---------- */
+@media (max-width: 860px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .wiki-layout { grid-template-columns: 1fr; }
+  .wiki-toc { position: static; }
+}
+
+@media (max-width: 720px) {
+  .hamburger { display: flex; }
+  .main-nav {
+    position: fixed;
+    top: var(--header-h);
+    right: 0;
+    left: 0;
+    background: var(--c-bg-elevated);
+    border-bottom: 1px solid var(--c-red-dim);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 24px 20px;
+    gap: 4px;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition), transform var(--transition);
+  }
+  .main-nav.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .main-nav a { padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki — VieGem Network</title>
+  <meta name="description" content="Wiki hướng dẫn chơi tại VieGem Network: cách bắt đầu, cốt truyện, hệ thống nhiệm vụ và nhiều hơn nữa.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="\assets\logo-viegem.webp">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="\assets\logo-viegem.webp" alt="Logo VieGem Network">
+        <span><span class="brand-red">Vie</span><span class="brand-yellow">Gem</span></span>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="/">Home</a>
+        <a href="/rules/">Rules</a>
+        <a href="/staffs/">Staffs</a>
+        <a href="/wiki/" class="active">Wiki</a>
+      </nav>
+      <button class="hamburger" aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:56px;">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a><span class="sep">/</span><span class="current">Wiki</span></div>
+      <h2>Wiki <span class="accent">hướng dẫn</span></h2>
+
+      <div class="wiki-layout">
+        <!-- ===== SIDEBAR MỤC LỤC =====
+             Mỗi link trỏ tới #id của một .wiki-card bên phải.
+             Thêm mục wiki mới ở phần nội dung thì nhớ thêm link tương ứng ở đây. -->
+        <nav class="wiki-toc" aria-label="Mục lục Wiki">
+          <h4>Mục lục</h4>
+          <ul>
+            <li><a href="#bat-dau">Bắt đầu chơi</a></li>
+            <li><a href="#kinh-te">Hệ thống kinh tế</a></li>
+            <li><a href="#nhiem-vu">Nhiệm vụ &amp; Cốt truyện</a></li>
+            <li><a href="#guild">Guild &amp; Guild War</a></li>
+          </ul>
+        </nav>
+
+        <div class="wiki-content">
+
+          <!-- ===== WIKI SECTION: BẮT ĐẦU =====
+               Để thêm mục wiki mới: copy toàn bộ block <div class="wiki-card">...</div> bên dưới và sửa nội dung.
+               Để sửa tiêu đề: thay đổi thẻ <h2>.
+               Để sửa nội dung: thay đổi nội dung bên trong <div class="wiki-content">.
+               Nhớ id trên <div class="wiki-card"> phải khớp với link mục lục (href="#...") bên trái.
+          -->
+          <div class="wiki-card fade-up" id="bat-dau">
+            <h2>Bắt đầu chơi</h2>
+            <div class="wiki-body">
+              <p>Sau khi kết nối tới <code>viegem.net</code>, bạn sẽ được đưa qua màn hình chọn cụm chơi. Chọn <strong>MagiRPG</strong> để bắt đầu hành trình nhập vai phép thuật đầu tiên.</p>
+              <ul>
+                <li>Gõ <code>/spawn</code> để quay lại điểm xuất phát bất cứ lúc nào.</li>
+                <li>Gõ <code>/kit starter</code> để nhận bộ trang bị khởi đầu (chỉ dùng được 1 lần).</li>
+                <li>Tham gia kênh <code>#hoi-dap</code> trên Discord nếu cần hỗ trợ.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ===== WIKI SECTION: HỆ THỐNG KINH TẾ ===== -->
+          <div class="wiki-card fade-up" id="kinh-te">
+            <h2>Hệ thống kinh tế</h2>
+            <div class="wiki-body">
+              <p>Server sử dụng đơn vị tiền tệ <strong>Gem</strong>. Bạn có thể kiếm Gem bằng cách bán vật phẩm tại chợ, hoàn thành nhiệm vụ, hoặc giao dịch với người chơi khác.</p>
+              <ul>
+                <li><code>/ah</code> — Mở nhà đấu giá để mua/bán vật phẩm hiếm.</li>
+                <li><code>/shop</code> — Mở cửa hàng server để mua vật phẩm cơ bản.</li>
+                <li><code>/pay [tên] [số tiền]</code> — Chuyển Gem cho người chơi khác.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ===== WIKI SECTION: NHIỆM VỤ & CỐT TRUYỆN ===== -->
+          <div class="wiki-card fade-up" id="nhiem-vu">
+            <h2>Nhiệm vụ &amp; Cốt truyện</h2>
+            <div class="wiki-body">
+              <p>MagiRPG có hệ thống cốt truyện chính chia thành nhiều chương. Gõ <code>/quest</code> để xem nhật ký nhiệm vụ hiện tại của bạn.</p>
+              <ul>
+                <li>Nhiệm vụ chính (màu vàng) — theo dõi cốt truyện của server.</li>
+                <li>Nhiệm vụ phụ (màu trắng) — nhận thêm phần thưởng và vật phẩm hiếm.</li>
+                <li>Nhiệm vụ sự kiện (theo mùa) — chỉ xuất hiện trong thời gian giới hạn.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ===== WIKI SECTION: GUILD & GUILD WAR ===== -->
+          <div class="wiki-card fade-up" id="guild">
+            <h2>Guild &amp; Guild War</h2>
+            <div class="wiki-body">
+              <p>Tạo hoặc tham gia một Guild để cùng chinh phục các thử thách lớn. Guild War diễn ra định kỳ vào cuối tuần.</p>
+              <ul>
+                <li><code>/guild create [tên]</code> — Tạo guild mới (yêu cầu 500 Gem).</li>
+                <li><code>/guild invite [tên]</code> — Mời người chơi vào guild.</li>
+                <li><code>/guild war</code> — Xem lịch và tham gia Guild War.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 🧩 Thêm mục wiki mới bằng cách copy 1 khối .wiki-card ở trên,
+               đổi id, tiêu đề <h2>, nội dung, và thêm link tương ứng vào mục lục bên trái. -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="\assets\logo-viegem.webp" alt="Logo VieGem Network">
+          <span><span class="brand-red">Vie</span><span class="brand-yellow">Gem</span></span>
+        </div>
+        <p>Máy chủ Minecraft Việt Nam — nơi hội tụ cộng đồng game thủ đam mê xây dựng và phiêu lưu.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Liên kết nhanh</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li><a href="/staffs/">Staffs</a></li>
+          <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://discord.gg" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="mailto:contact@viegem.net">contact@viegem.net</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Copyright © <span id="current-year">2025</span> VieGem Network. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Cuộn mượt tới mục wiki khi bấm vào Mục lục, KHÔNG đổi URL
+    // (giữ thanh địa chỉ sạch sẽ, không hiện #id sau khi bấm).
+    const tocLinks = document.querySelectorAll('.wiki-toc a[href^="#"]');
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true }); // hỗ trợ đọc màn hình mà không thêm #id vào URL
+        }
+      });
+    });
+
+    // Tô sáng mục lục tương ứng với phần đang xem trên màn hình
+    const wikiCards = document.querySelectorAll(".wiki-card[id]");
+    if ("IntersectionObserver" in window && wikiCards.length) {
+      const tocObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              tocLinks.forEach((l) => l.classList.remove("active"));
+              const activeLink = document.querySelector(`.wiki-toc a[href="#${entry.target.id}"]`);
+              if (activeLink) activeLink.classList.add("active");
+            }
+          });
+        },
+        { rootMargin: "-45% 0px -45% 0px" }
+      );
+      wikiCards.forEach((card) => tocObserver.observe(card));
+    }
+  </script>
+</body>
+</html>

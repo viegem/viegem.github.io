@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nội quy — VieGem Network</title>
+  <meta name="description" content="Nội quy Discord và nội quy trong máy chủ VieGem Network.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="\assets\logo-viegem.webp">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="\assets\logo-viegem.webp" alt="Logo VieGem Network">
+        <span><span class="brand-red">Vie</span><span class="brand-yellow">Gem</span></span>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="/">Home</a>
+        <a href="/rules/" class="active">Rules</a>
+        <a href="/staffs/">Staffs</a>
+        <a href="/wiki/">Wiki</a>
+      </nav>
+      <button class="hamburger" aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:56px;">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a><span class="sep">/</span><span class="current">Rules</span></div>
+      <h2>Nội <span class="accent">quy</span></h2>
+
+      <!-- Tab chuyển đổi giữa 2 nhóm luật -->
+      <div class="rules-tabs" role="tablist" aria-label="Chọn nhóm nội quy">
+        <button class="rules-tab-btn active" data-tab="discord" role="tab" aria-selected="true">Luật Discord</button>
+        <button class="rules-tab-btn" data-tab="server" role="tab" aria-selected="false">Luật trong máy chủ</button>
+      </div>
+
+      <!-- ===== PANEL 1: LUẬT DISCORD ===== -->
+      <div class="rules-panel active" data-panel="discord">
+        <div class="rules-box fade-up">
+          <h3>Quy định chung trên Discord</h3>
+          <ol>
+            <li>Tôn trọng mọi thành viên, không công kích cá nhân, phân biệt vùng miền hay xúc phạm người khác.</li>
+            <li>Không spam tin nhắn, emoji, hoặc ping hàng loạt (@everyone, @here) khi không cần thiết.</li>
+            <li>Không đăng nội dung 18+, bạo lực, chính trị nhạy cảm hoặc gây tranh cãi.</li>
+            <li>Sử dụng đúng kênh cho đúng mục đích (hỗ trợ, chat chung, báo lỗi...).</li>
+            <li>Không quảng cáo server khác hoặc sản phẩm/dịch vụ khi chưa được staff cho phép.</li>
+            <li>Nghiêm cấm mạo danh Admin/Mod hoặc giả mạo thông báo chính thức của server.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ===== PANEL 2: LUẬT TRONG MÁY CHỦ ===== -->
+      <div class="rules-panel" data-panel="server">
+        <!-- Luật chung áp dụng cho mọi cụm -->
+        <div class="rules-box fade-up">
+          <h3>Luật chung (áp dụng mọi cụm)</h3>
+          <ol>
+            <li>Không sử dụng hack client, x-ray, autoclicker hoặc bất kỳ phần mềm gian lận nào.</li>
+            <li>Không khai thác lỗi (bug/exploit) để trục lợi — vui lòng báo cáo cho staff khi phát hiện lỗi.</li>
+            <li>Không xây dựng công trình phản cảm, xúc phạm tôn giáo, chính trị hoặc cá nhân khác.</li>
+            <li>Không lừa đảo, lợi dụng lòng tin để chiếm đoạt tài sản trong game của người chơi khác.</li>
+            <li>Nghiêm cấm mọi hình thức mua bán tài khoản, vật phẩm bằng tiền thật ngoài kênh chính thức.</li>
+          </ol>
+        </div>
+
+        <!-- Luật riêng cho từng cụm — thêm cụm mới bằng cách copy khối .rules-box này -->
+        <div class="rules-box fade-up">
+          <h3>Luật riêng — MagiRPG</h3>
+          <ol>
+            <li>Không train quái tại khu vực spawn hoặc khu vực dành cho người chơi mới.</li>
+            <li>Không PvP ngoài vùng an toàn (safe-zone) nếu chưa bật chế độ chiến đấu.</li>
+            <li>Không lạm dụng phép thuật/skill để gây lag server (spam hiệu ứng liên tục).</li>
+            <li>Guild War chỉ diễn ra trong khung giờ quy định — xem chi tiết tại trang Wiki.</li>
+          </ol>
+        </div>
+
+        <!-- 🧩 Chỗ trống để thêm luật cho cụm mới trong tương lai -->
+        <!--
+        <div class="rules-box fade-up">
+          <h3>Luật riêng — [Tên cụm mới]</h3>
+          <ol>
+            <li>...</li>
+          </ol>
+        </div>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="\assets\logo-viegem.webp" alt="Logo VieGem Network">
+          <span><span class="brand-red">Vie</span><span class="brand-yellow">Gem</span></span>
+        </div>
+        <p>Máy chủ Minecraft Việt Nam — nơi hội tụ cộng đồng game thủ đam mê xây dựng và phiêu lưu.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Liên kết nhanh</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li><a href="/staffs/">Staffs</a></li>
+          <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://discord.gg" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="mailto:contact@viegem.net">contact@viegem.net</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Copyright © <span id="current-year">2025</span> VieGem Network. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Chuyển đổi tab Luật Discord / Luật trong máy chủ
+    document.querySelectorAll(".rules-tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".rules-tab-btn").forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-selected", "false");
+        });
+        document.querySelectorAll(".rules-panel").forEach((p) => p.classList.remove("active"));
+
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+        document.querySelector(`[data-panel="${btn.dataset.tab}"]`).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>

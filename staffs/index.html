@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đội ngũ Staff — VieGem Network</title>
+  <meta name="description" content="Danh sách đội ngũ quản trị viên, moderator và helper của VieGem Network.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/assets/logo-viegem.webp">
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/logo-viegem.webp" alt="Logo VieGem Network">
+        <span><span class="brand-red">Vie</span><span class="brand-yellow">Gem</span></span>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="/">Home</a>
+        <a href="/rules/">Rules</a>
+        <a href="/staffs/" class="active">Staffs</a>
+        <a href="/wiki/">Wiki</a>
+      </nav>
+      <button class="hamburger" aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:56px;">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a><span class="sep">/</span><span class="current">Staffs</span></div>
+      <h2>Đội ngũ <span class="accent">Staff</span></h2>
+
+      <!-- ==========================================================================
+           DANH SÁCH STAFF — HTML TĨNH (luôn hiện, kể cả khi JS lỗi/không load được)
+           + staffs.js sẽ "tô điểm" thêm: tự cập nhật trạng thái Discord (Online/
+           Idle/DND/Offline) và avatar Discord thật, nếu file JS load thành công.
+           Nếu JS không chạy được vì bất kỳ lý do gì, card vẫn hiện đầy đủ với
+           trạng thái mặc định bạn gõ sẵn bên dưới — không bao giờ bị trắng trang.
+
+           👉 CÁCH THÊM / SỬA 1 STAFF:
+           Copy nguyên khối <div class="staff-card fade-up"> ... </div> bên dưới,
+           dán vào trong <div class="staff-grid">, rồi sửa:
+             1. data-discord-id="..." trên thẻ .staff-card
+                → ID Discord thật (18-19 số) để JS lấy trạng thái + avatar real-time.
+                  Nếu không có/không muốn dùng, xoá hẳn thuộc tính này —
+                  JS sẽ bỏ qua card đó và giữ nguyên trạng thái tĩnh bạn gõ sẵn.
+             2. Link ảnh skin: https://mc-heads.net/avatar/TÊN_INGAME/100
+             3. Chức vụ trong <span class="staff-role">
+             4. Tên trong <div class="staff-name">
+             5. Trạng thái mặc định (hiện ngay, trước khi JS kịp cập nhật):
+                đổi class ở <span class="staff-discord-dot ...">:
+                  "online" (xanh) / "idle" (vàng) / "dnd" (đỏ) / để trống (offline)
+                và sửa chữ trong <span data-discord-text> theo cho khớp.
+      ========================================================================== -->
+      <div class="staff-grid">
+
+        <!-- Staff #1 -->
+        <div class="staff-card fade-up" data-discord-id="1050010518527684620">
+          <div class="staff-avatars">
+            <div class="staff-skin-wrap">
+              <img class="staff-skin" src="https://mc-heads.net/avatar/fitruong02/100" alt="Skin Minecraft của Fitruong02">
+              <img class="staff-discord-badge" data-discord-avatar src="/assets/avatar-owner.webp" alt="Avatar Discord của fitruong02">
+            </div>
+          </div>
+          <span class="staff-role">Owner</span>
+          <div class="staff-name">fitruong02</div>
+          <div class="staff-discord">
+            <span class="staff-discord-dot offline" data-discord-dot></span>
+            <span data-discord-text>Offline</span>
+          </div>
+        </div>
+
+        <!-- Staff #2 — ⚠️ ĐIỀN ID DISCORD THẬT + TÊN THẬT VÀO ĐÂY (đang là ô mẫu trống) -->
+        <div class="staff-card fade-up" data-discord-id="626069321550004240">
+          <div class="staff-avatars">
+            <div class="staff-skin-wrap">
+              <img class="staff-skin" src="https://mc-heads.net/avatar/DangCap/100">
+              <img class="staff-discord-badge" data-discord-avatar src="/assets/avatar_co_owner.png" alt="Avatar Discord của co-owner">
+            </div>
+          </div>
+          <span class="staff-role">Co-Owner</span>
+          <div class="staff-name">DangCap</div>
+          <div class="staff-discord">
+            <span class="staff-discord-dot" data-discord-dot></span>
+            <span data-discord-text>Offline</span>
+          </div>
+        </div>
+<!-- Staff 3-->
+	<div class="staff-card fade-up" data-discord-id="1101703748860006441">
+          <div class="staff-avatars">
+            <div class="staff-skin-wrap">
+              <img class="staff-skin" src="https://mc-heads.net/avatar/minhmcpc/100">
+              <img class="staff-discord-badge" data-discord-avatar src="/assets/avatar-admin.webp" alt="Avatar Discord của admin">
+            </div>
+          </div>
+          <span class="staff-role">Admin</span>
+          <div class="staff-name">minhmcpc</div>
+          <div class="staff-discord">
+            <span class="staff-discord-dot" data-discord-dot></span>
+            <span data-discord-text>Offline</span>
+          </div>
+        </div>
+
+	<!-- Staff 4-->
+	<div class="staff-card fade-up" data-discord-id="866330623975489548">
+          <div class="staff-avatars">
+            <div class="staff-skin-wrap">
+              <img class="staff-skin" src="https://mc-heads.net/avatar/__Capybaraa_/100">
+              <img class="staff-discord-badge" data-discord-avatar src="/assets/avatar-admin1.webp" alt="Avatar Discord của admin">
+            </div>
+          </div>
+          <span class="staff-role">Admin</span>
+          <div class="staff-name">__Capybaraa_</div>
+          <div class="staff-discord">
+            <span class="staff-discord-dot" data-discord-dot></span>
+            <span data-discord-text>Offline</span>
+          </div>
+        </div>
+
+	<!-- Staff 5-->
+	<div class="staff-card fade-up" data-discord-id="1320923672034148482">
+          <div class="staff-avatars">
+            <div class="staff-skin-wrap">
+              <img class="staff-skin" src="https://mc-heads.net/avatar/HenryVN/100">
+              <img class="staff-discord-badge" data-discord-avatar src="/assets/avatar-admin2.png" alt="Avatar Discord của admin">
+            </div>
+          </div>
+          <span class="staff-role">Admin</span>
+          <div class="staff-name">HenryVN</div>
+          <div class="staff-discord">
+            <span class="staff-discord-dot" data-discord-dot></span>
+            <span data-discord-text>Offline</span>
+          </div>
+        </div>
+
+
+
+        <!-- 🧩 Thêm staff mới: copy nguyên khối "Staff #2" ở trên, dán bên dưới,
+             rồi sửa data-discord-id, link skin, chức vụ và tên cho từng người. -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="/assets/logo-viegem.webp" alt="Logo VieGem Network">
+          <span><span class="brand-red">Vie</span><span class="brand-yellow">Gem</span></span>
+        </div>
+        <p>Máy chủ Minecraft Việt Nam — nơi hội tụ cộng đồng game thủ đam mê xây dựng và phiêu lưu.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Liên kết nhanh</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li><a href="/staffs/">Staffs</a></li>
+          <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://discord.gg" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="mailto:contact@viegem.net">contact@viegem.net</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Copyright © <span id="current-year">2025</span> VieGem Network. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/staffs.js"></script>
+</body>
+</html>

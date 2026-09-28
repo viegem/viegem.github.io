@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki MagiRPG — VieGem Network</title>
+  <meta name="description" content="Wiki hướng dẫn chơi cụm MagiRPG: cách chơi, khởi đầu, lệnh và kỹ năng.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/assets/logo-viegem.webp">
+
+  <!-- ==========================================================================
+       CSS RIÊNG cho trang wiki MagiRPG — chỉ để hỗ trợ nhúng ảnh/video minh hoạ
+       và bảng lệnh. Không cần đụng vào /css/style.css cho các phần này.
+       ========================================================================== -->
+  <style>
+    /* Ảnh minh hoạ trong wiki */
+    .wiki-media-img {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--c-red-dim);
+      margin: 14px 0;
+    }
+    /* Khung video 16:9 responsive — dùng cho cả <video> tự host lẫn iframe YouTube */
+    .wiki-video-embed {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* tỉ lệ 16:9 */
+      margin: 14px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--c-red-dim);
+      background: var(--c-bg-elevated);
+    }
+    .wiki-video-embed iframe,
+    .wiki-video-embed video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    figcaption.wiki-caption {
+      color: var(--c-text-dim);
+      font-size: 0.88rem;
+      margin-top: -8px;
+      margin-bottom: 14px;
+    }
+    /* Bảng danh sách lệnh */
+    .wiki-cmd-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+    }
+    .wiki-cmd-table th, .wiki-cmd-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--c-red-dim);
+    }
+    .wiki-cmd-table th {
+      color: var(--c-yellow);
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      letter-spacing: 0.4px;
+    }
+    .wiki-cmd-table td code { color: var(--c-yellow); }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER (đồng bộ với toàn site) ============ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="brand">
+        <img src="/assets/logo-viegem.webp" alt="Logo VieGem Network">
+        <span><span class="brand-red">Vie</span><span class="brand-yellow">Gem</span></span>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="/">Home</a>
+        <a href="/rules/">Rules</a>
+        <a href="/staffs/">Staffs</a>
+        <a href="/wiki/">Wiki</a>
+      </nav>
+      <button class="hamburger" aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top:56px;">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a><span class="sep">/</span>
+        <a href="/magirpg/">MagiRPG</a><span class="sep">/</span>
+        <span class="current">Wiki</span>
+      </div>
+      <h2>Wiki <span class="accent" style="color:var(--c-yellow)">MagiRPG</span></h2>
+      <p class="tagline" style="margin:0 auto 12px;">Toàn bộ hướng dẫn chơi cụm MagiRPG — cách chơi, khởi đầu, lệnh và kỹ năng.</p>
+
+      <!-- 🔽 NÚT TẢI RESOURCE PACK — đổi link trong href nếu rsp cập nhật phiên bản mới -->
+      <div class="hero-actions" style="margin-top:8px; margin-bottom:44px;">
+        <a class="btn btn-primary"
+           href="https://raw.githubusercontent.com/corelinksstudio-base/viegem_rsp/main/generated.zip"
+           download
+           aria-label="Tải Resource Pack cho MagiRPG">
+          🎨 Tải Resource Pack
+        </a>
+      </div>
+
+      <div class="wiki-layout">
+        <!-- ===== SIDEBAR MỤC LỤC =====
+             Mỗi link trỏ tới #id của 1 .wiki-card bên phải.
+             Thêm mục mới thì nhớ thêm luôn 1 dòng <li><a href="#id">...</a></li> ở đây. -->
+        <nav class="wiki-toc" aria-label="Mục lục Wiki MagiRPG">
+          <h4>Mục lục</h4>
+          <ul>
+            <li><a href="#cach-choi">Cách chơi</a></li>
+            <li><a href="#khoi-dau">Khởi đầu</a></li>
+            <li><a href="#lenh">Lệnh</a></li>
+            <li><a href="#ky-nang">Kỹ năng</a></li>
+          </ul>
+        </nav>
+
+        <div class="wiki-content">
+
+          <!-- ==========================================================================
+               HƯỚNG DẪN CHUNG — CÁCH CHÈN ẢNH / VIDEO VÀO 1 MỤC WIKI
+
+               ➤ Chèn ẢNH minh hoạ:
+                 <img class="wiki-media-img" src="/magirpg/wiki/assets/ten-anh.jpg" alt="Mô tả ảnh">
+                 <figcaption class="wiki-caption">Chú thích ngắn cho ảnh (tuỳ chọn)</figcaption>
+                 (Nên tạo sẵn thư mục /magirpg/wiki/assets/ để chứa ảnh riêng cho wiki này,
+                 hoặc dùng chung /assets/ ở gốc site.)
+
+               ➤ Chèn VIDEO tự host (file .mp4 của bạn):
+                 <div class="wiki-video-embed">
+                   <video controls poster="/magirpg/wiki/assets/poster.jpg">
+                     <source src="/magirpg/wiki/assets/video.mp4" type="video/mp4">
+                   </video>
+                 </div>
+
+               ➤ Chèn VIDEO từ YouTube (nhúng iframe):
+                 <div class="wiki-video-embed">
+                   <iframe src="https://www.youtube.com/embed/ID_VIDEO"
+                           title="Tên video" allowfullscreen></iframe>
+                 </div>
+                 (ID_VIDEO lấy từ link YouTube: youtube.com/watch?v=ID_VIDEO)
+          ========================================================================== -->
+
+          <!-- ===== WIKI SECTION: CÁCH CHƠI =====
+               Để thêm mục wiki mới: copy toàn bộ block <div class="wiki-card">...</div>
+               bên dưới, đổi id, tiêu đề <h2>, và nội dung. Nhớ thêm link tương ứng
+               vào <nav class="wiki-toc"> bên trái. -->
+          <div class="wiki-card fade-up" id="cach-choi">
+            <h2>Cách chơi</h2>
+            <div class="wiki-body">
+              <p>MagiRPG là cụm nhập vai phép thuật — bạn chọn một trường phái phép thuật, chiến đấu với quái vật, hoàn thành cốt truyện và phát triển nhân vật qua từng chương.</p>
+
+              <!-- 🖼️ Ví dụ chèn ảnh minh hoạ — thay src bằng ảnh chụp màn hình thật -->
+              <img class="wiki-media-img" src="https://placehold.co/900x506/131316/f4c430?text=Screenshot+MagiRPG" alt="Ảnh minh hoạ lối chơi MagiRPG">
+              <figcaption class="wiki-caption">Ảnh minh hoạ — thay bằng screenshot thật của server.</figcaption>
+
+              <ul>
+                <li>Chọn 1 trong nhiều trường phái phép thuật (Hoả, Băng, Chữa thương, Bóng tối...).</li>
+                <li>Đánh quái, làm nhiệm vụ để nhận EXP và lên cấp nhân vật.</li>
+                <li>Tham gia Guild để cùng nhau chinh phục boss và Guild War.</li>
+                <li>Giao dịch, đấu giá vật phẩm trong hệ thống kinh tế Gem.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ===== WIKI SECTION: KHỞI ĐẦU ===== -->
+          <div class="wiki-card fade-up" id="khoi-dau">
+            <h2>Khởi đầu</h2>
+            <div class="wiki-body">
+              <p>Các bước đầu tiên khi mới vào MagiRPG:</p>
+              <ol>
+                <li>Kết nối server bằng IP <code>viegem.net</code>, chọn cụm <strong>MagiRPG</strong>.</li>
+                <li>Gõ <code>/kit starter</code> để nhận bộ trang bị khởi đầu (chỉ dùng được 1 lần).</li>
+                <li>Chọn trường phái phép thuật đầu tiên tại NPC hướng dẫn ở khu vực spawn.</li>
+                <li>Hoàn thành nhiệm vụ mở đầu để nhận thêm EXP và Gem khởi động.</li>
+              </ol>
+
+              <!-- 🎬 Ví dụ nhúng video hướng dẫn từ YouTube — thay ID_VIDEO bằng video thật -->
+              <div class="wiki-video-embed">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        title="Video hướng dẫn khởi đầu MagiRPG" allowfullscreen></iframe>
+              </div>
+              <figcaption class="wiki-caption">Video hướng dẫn mẫu — thay ID_VIDEO bằng video thật của bạn.</figcaption>
+            </div>
+          </div>
+
+          <!-- ===== WIKI SECTION: LỆNH ===== -->
+          <div class="wiki-card fade-up" id="lenh">
+            <h2>Lệnh</h2>
+            <div class="wiki-body">
+              <p>Danh sách lệnh thường dùng trong MagiRPG:</p>
+              <table class="wiki-cmd-table">
+                <thead>
+                  <tr><th>Lệnh</th><th>Chức năng</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>/spawn</code></td><td>Quay lại điểm xuất phát</td></tr>
+                  <tr><td><code>/kit starter</code></td><td>Nhận trang bị khởi đầu (1 lần)</td></tr>
+                  <tr><td><code>/quest</code></td><td>Xem nhật ký nhiệm vụ hiện tại</td></tr>
+                  <tr><td><code>/skill</code></td><td>Mở bảng kỹ năng phép thuật</td></tr>
+                  <tr><td><code>/ah</code></td><td>Mở nhà đấu giá</td></tr>
+                  <tr><td><code>/guild</code></td><td>Quản lý / tham gia Guild</td></tr>
+                  <tr><td><code>/pay [tên] [số tiền]</code></td><td>Chuyển Gem cho người chơi khác</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ===== WIKI SECTION: KỸ NĂNG ===== -->
+          <div class="wiki-card fade-up" id="ky-nang">
+            <h2>Kỹ năng</h2>
+            <div class="wiki-body">
+              <p>Một số kỹ năng tiêu biểu theo trường phái phép thuật:</p>
+              <!-- Dùng lại .feature-grid / .feature-card có sẵn trong style.css -->
+              <div class="feature-grid">
+                <div class="feature-card">
+                  <h3>Fireball</h3>
+                  <p>Phóng cầu lửa gây sát thương diện rộng — trường phái Hoả.</p>
+                </div>
+                <div class="feature-card">
+                  <h3>Ice Shard</h3>
+                  <p>Mảnh băng làm chậm mục tiêu, kết hợp combo hiệu quả — trường phái Băng.</p>
+                </div>
+                <div class="feature-card">
+                  <h3>Heal Aura</h3>
+                  <p>Hồi máu cho bản thân và đồng đội xung quanh — trường phái Chữa thương.</p>
+                </div>
+                <div class="feature-card">
+                  <h3>Shadow Step</h3>
+                  <p>Dịch chuyển đoản trong bóng tối, né đòn hiểm — trường phái Bóng tối.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 🧩 Thêm mục wiki mới bằng cách copy 1 khối .wiki-card ở trên,
+               đổi id, tiêu đề, nội dung, và thêm link vào mục lục bên trái. -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER (đồng bộ với toàn site) ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="/assets/logo-viegem.webp" alt="Logo VieGem Network">
+          <span><span class="brand-red">Vie</span><span class="brand-yellow">Gem</span></span>
+        </div>
+        <p>Máy chủ Minecraft Việt Nam — nơi hội tụ cộng đồng game thủ đam mê xây dựng và phiêu lưu.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Liên kết nhanh</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/rules/">Rules</a></li>
+          <li><a href="/staffs/">Staffs</a></li>
+          <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://discord.gg" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="mailto:contact@viegem.net">contact@viegem.net</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      Copyright © <span id="current-year">2025</span> VieGem Network. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Cuộn mượt tới mục wiki khi bấm vào Mục lục, KHÔNG đổi URL (giữ thanh địa chỉ sạch).
+    const tocLinks = document.querySelectorAll('.wiki-toc a[href^="#"]');
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
+        }
+      });
+    });
+
+    // Tô sáng mục lục tương ứng với phần đang xem trên màn hình
+    const wikiCards = document.querySelectorAll(".wiki-card[id]");
+    if ("IntersectionObserver" in window && wikiCards.length) {
+      const tocObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              tocLinks.forEach((l) => l.classList.remove("active"));
+              const activeLink = document.querySelector(`.wiki-toc a[href="#${entry.target.id}"]`);
+              if (activeLink) activeLink.classList.add("active");
+            }
+          });
+        },
+        { rootMargin: "-45% 0px -45% 0px" }
+      );
+      wikiCards.forEach((card) => tocObserver.observe(card));
+    }
+  </script>
+</body>
+</html>
